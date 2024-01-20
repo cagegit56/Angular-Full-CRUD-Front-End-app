@@ -36,17 +36,23 @@
 								<!-- <span class="fa fa-lock"></span> -->
                 <input
                 class="form__input"
-                type="Email"
+                type="email"
                 formControlName="Email"
                 placeholder="Email"
-                [pattern]="emailPattern"
                 [ngClass]="{ 'is-invalid': submitted && f['Email'].errors }"
-                 />
-                 
+                
+               />
+                 <!-- [email]="true" -->
               <div *ngIf="submitted && f['Email'].errors" class="invalid-feedback">
                 <div *ngIf="f['Email'].errors?.['required']">Email is required</div>
-                <label data-error="Invalid email!">Invalid Email Format</label>
+
+                <div *ngIf="f['Email'].errors?.['email']">
+                  Email Format is Invalid
+                  </div>
+                
               </div>
+            
+            
 							</div>
 
 							<div class="row">
@@ -57,23 +63,44 @@
                 formControlName="Password"
                 placeholder="Password"
                 [ngClass]="{ 'is-invalid': submitted && f['Password'].errors }"
+                
                  />
               <div *ngIf="submitted && f['Password'].errors" class="invalid-feedback">
                 <div *ngIf="f['Password'].errors?.['required']">Password is required</div>
-              </div>
-              <div *ngIf="f['Password'].errors?.['minlength']">
-                Password must be at least 8 characters
-              </div>
-              <div *ngIf="f['Password'].errors?.['maxlength']">
-                Password must not exceed 20 characters
-              </div>
+                <div *ngIf="f['Password'].errors?.['minlength']">
+                  Password must be at least 8 characters
+                </div>
+                <div *ngIf="f['Password'].errors?.['maxlength']">
+                  Password must not exceed 16 characters
+                </div>
 
-              <div *ngIf="Password.errors?.['pattern']">
-                Password must contain at least one number, one uppercase and a lowercase letter 
-                and at least 8 characters<br>Password cannot contain whitespace
+                <div *ngIf="f['Password'].errors?.['pattern']">
+                  Password must contain at least one number, one uppercase and a lowercase letter 
+                  and at least 8 characters<br>Password cannot contain whitespace
+                </div>
+
+              </div>
+             
+
+							</div>
+
+              <div class="row">
+							
+                <input
+                class="form__input"
+                type="password"
+                formControlName="confirmPassword"
+                placeholder="Confirm Password"
+                [ngClass]="{ 'is-invalid': submitted && f['confirmPassword'].errors }"
+                 />
+              <div *ngIf="submitted && f['confirmPassword'].errors" class="invalid-feedback">
+                <div *ngIf="f['confirmPassword'].errors?.['required']">Confirm Password</div>
               </div>
 
 							</div>
+
+
+
 							<!-- <div class="row">
 								<input type="checkbox" name="remember_me" id="remember_me" class="">
 								<label for="remember_me">Remember Me!</label>
