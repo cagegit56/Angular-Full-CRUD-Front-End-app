@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../_services/auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -29,6 +29,7 @@ errors : any;
 
 
 
+
   constructor(private fg : FormBuilder, private auth : AuthService, private router: Router ,private toastr: ToastrService){
     this.RegForm = new FormGroup({
       UserName: new FormControl(),
@@ -47,15 +48,17 @@ errors : any;
        Password: ['', [Validators.required,
        Validators.pattern(/^(?=\D*\d)(?=[^a-z]*[a-z])(?=.*[$@$!%*?&])(?=[^A-Z]*[A-Z]).{8,16}$/),
        Validators.minLength(8),
-       Validators.maxLength(16)
-      ]
+       Validators.maxLength(16) ]
        ],
-       confirmPassword: ['', Validators.required]
-      // Password: ['', Validators.required, Validators.minLength(8),
-      // Validators.maxLength(40), Validators.pattern('^((?!.*[s])(?=.*[A-Z])(?=.*d).{8,99})') ],
-      //no special character (/^(?=\D*\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{8,30}$/)
+       confirmPassword: ['', Validators.required ]
 
-    });
+      //no special character pattern (/^(?=\D*\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{8,30}$/)
+
+    },
+    {
+      validator: this.validatePasswords
+    }
+    );
   
   }
 
@@ -82,6 +85,39 @@ errors : any;
     
     }
 
+
   }
 
+  validatePasswords (formGroup: FormGroup): any {
+    const password = formGroup.controls ['Password'];
+    const confirmPassword = formGroup.controls ['confirmPassword'];
+    // don't validate if either field is empty
+    if (password.pristine || confirmPassword.pristine) {
+      return null;
+      
+    }
+  
+    // mark the form as touched
+    formGroup.markAsTouched ();
+  
+    // return null if passwords match, or an error object if they don't
+    if (password.value === confirmPassword.value) {
+      return null;
+    } else {
+      return confirmPassword.setErrors ( {
+        notEqual: true
+        
+      });
+    }
+  }
+  
+
+
+
+
+  
+
 }
+
+
+

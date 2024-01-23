@@ -95,7 +95,12 @@
                  />
               <div *ngIf="submitted && f['confirmPassword'].errors" class="invalid-feedback">
                 <div *ngIf="f['confirmPassword'].errors?.['required']">Confirm Password</div>
-              </div>
+
+                <div *ngIf="f['confirmPassword'].errors?.['notEqual']" >
+                  Passwords does not match
+                </div>
+               </div>
+
 
 							</div>
 
