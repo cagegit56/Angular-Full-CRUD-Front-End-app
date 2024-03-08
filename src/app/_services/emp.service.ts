@@ -4,6 +4,7 @@ import { environment } from '../../environments/environment';
 import { Emp } from '../_models/emp';
 
 const baseUrl = environment.apiUrl + "/Employee";
+const baseUrl2 = '';
 
 @Injectable({
   providedIn: 'root'
@@ -38,5 +39,6 @@ export class EmpService {
   delete(id: number) {
     return this.http.delete(`${baseUrl}/${id}`,this.httpOptions);
   }
+
 
 }

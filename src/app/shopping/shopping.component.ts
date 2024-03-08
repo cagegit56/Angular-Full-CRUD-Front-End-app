@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-shopping',
@@ -9,6 +10,8 @@ export class ShoppingComponent {
 
 
 qnt : any;
+
+constructor(private toastr: ToastrService){}
 
 ngOnInit(){
   this.cartItemFunc();
@@ -66,6 +69,7 @@ addCart(category: any){
     let storeDataGet: any = [];
     storeDataGet.push(category);
     localStorage.setItem('localcart', JSON.stringify(storeDataGet));
+    this.toastr.success('Successfully Added To Cart');
   }
   else{
     var id = category.prodId;
@@ -84,9 +88,11 @@ addCart(category: any){
     if(index == -1){
       this.itemsCart.push(category);
       localStorage.setItem('localcart', JSON.stringify(this.itemsCart));
+      this.toastr.success('Successfully Added To Cart');
     }
     else{
       localStorage.setItem('localcart', JSON.stringify(this.itemsCart));
+      this.toastr.success('Already Added To Cart');
     }
 
   }

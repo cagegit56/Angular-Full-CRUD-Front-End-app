@@ -16,6 +16,8 @@ import { ShoppingComponent } from './shopping/shopping.component';
 import { CartComponent } from './cart/cart.component';
 import { PaymentComponent } from './payment/payment.component';
 import { TransactionComponent } from './transaction/transaction.component';
+import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
+import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 
 
 @NgModule({
@@ -28,7 +30,9 @@ import { TransactionComponent } from './transaction/transaction.component';
     ShoppingComponent,
     CartComponent,
     PaymentComponent,
-    TransactionComponent   
+    TransactionComponent,
+    ForgotpasswordComponent,
+    ResetpasswordComponent   
   ],
   imports: [
     BrowserModule,

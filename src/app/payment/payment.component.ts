@@ -1,6 +1,10 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Component, ElementRef, Inject, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { EmpService } from '../_services/emp.service';
 
 @Component({
   selector: 'app-payment',
@@ -11,53 +15,32 @@ export class PaymentComponent {
 
   success = false;
   amount = 0;
+  payForm!: FormGroup;
+  merchant_key = "46f0cd694581a" ;
+  merchant_id = 10000100;
+  amountZar = 300;
+  item_name = "shirt";
 
-  @ViewChild('paymentRef', {static: true}) paymentRef! : ElementRef;
-  // , private payment: PaymentService
-
-  constructor(private router: Router, private toastr: ToastrService){}
+  constructor(@Inject(DOCUMENT) private document: Document,
+   private formBuilder: FormBuilder,
+   private router: Router,
+   private empService: EmpService,
+   private toastr: ToastrService,
+   private http: HttpClient){}
 
   ngOnInit(){
-    this.loadTotal();
-    window.paypal.Buttons(
-      {
-        style: {
-          layout: 'horizontal',
-          color: 'white',
-          shape: 'rect',
-          label: 'pay'
-        },
-        createOrder: (data: any, actions: any) =>{
-            return actions.order.create({
-              purchase_units: [
-                {
-                  amount:{ 
-                    value: this.amount.toString(),
-                    currency_code: 'EUR'
-                  }
-                }
-              ]
-            });
-        },
-        onApprove: ( data: any, actions: any) =>{
-          return actions.order.capture().then((details: any) =>{
-            if(details.status === 'COMPLETED'){
-              // this.payment.transactionID = details.id;
-              console.log(details);
-              this.removeAll();
-              this.router.navigate(['transaction']);
-            
-            }
-          });
-          
-        },
-        onError: (error: any) =>{
-          console.log(error);
-        }
+    this.loadTotal();   
 
-      }
-    ).render(this.paymentRef.nativeElement);
-    
+    this.payForm = this.formBuilder.group({
+  
+      merchant_id: [''],
+      merchant_key: [''],
+      amount: [''],
+      item_name: [''],
+      
+
+    });
+
   }
 
   cancel(){
@@ -90,5 +73,24 @@ removeAll(){
   this.total = 0;
 }
 
+onSubmit(){
+alert('danger gevaar');
+console.log(this.payForm.value);
+this.http.post<any>("https://sandbox.payfast.co.za​/eng/process", this.payForm.value)
+.subscribe(res=>{
+  alert("Signup successfull");
+  window.location.href = 'https://sandbox.payfast.co.za​/eng/process';
+  
+},err=>{
+  alert("something went seriously wrong");
+})
 
 }
+
+
+
+
+}
+
+
+
