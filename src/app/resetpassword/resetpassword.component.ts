@@ -75,7 +75,8 @@ export class ResetpasswordComponent {
           this.router.navigate(['/welcome']);
                   
         },(err: any) => {
-          console.log("status code--->" + err.status);
+          alert('Link Expired or Link has been tempered with');
+          console.log("status code--->" + err.message);
         })
 
       }
