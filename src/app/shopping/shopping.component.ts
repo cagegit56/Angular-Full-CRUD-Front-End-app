@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -11,7 +12,7 @@ export class ShoppingComponent {
 
 qnt : any;
 
-constructor(private toastr: ToastrService){}
+constructor(private toastr: ToastrService, private router: Router){}
 
 ngOnInit(){
   this.cartItemFunc();
@@ -106,6 +107,12 @@ cartItemFunc(){
     var cartCount = JSON.parse(localStorage.getItem('localcart')!)
     this.cartItems = cartCount.length;
   }
+}
+
+
+logOut(){
+  localStorage.removeItem('authToken');
+  this.router.navigate(['./welcome']);
 }
 
 

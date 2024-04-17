@@ -4,6 +4,8 @@ import { User } from '../_models/user';
 import { Observable } from 'rxjs';
 import { Forgotpass } from '../_models/forgotpass';
 import { Resetpass } from '../_models/resetpass';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({
@@ -11,16 +13,11 @@ import { Resetpass } from '../_models/resetpass';
 })
 export class AuthService {
   authenticated: any;
-  static isUserLoggedIn() {
-    throw new Error('Method not implemented.');
-  }
 
   private baseUrl: String = 'https://localhost:7193/api/Authenticate/';
-  private isloggedIn: boolean;
+  private userPayload: any;
 
-  constructor( private http: HttpClient, ) { 
-    this.isloggedIn = false;
-  }
+  constructor( private http: HttpClient, ) {}
 
 signUp(user: User){
   return this.http.post(
@@ -30,7 +27,6 @@ signUp(user: User){
 }
 
 login(user : User): Observable<string>{
-  this.isloggedIn = true;
   return this.http.post(
     'https://localhost:7193/api/Authenticate/login',user,
     {responseType: 'text'}
@@ -52,14 +48,45 @@ resetPassword(resetpass: Resetpass){
   );
 }
 
-// isUserLoggedIn(): boolean {
-//   return this.isloggedIn;
-// }
+roleMatch(allowedRoles: any){
+  var isMatch = false;
+  var userRole: any = this.getRole();
+  allowedRoles.forEach((element: any) => {
+    if(userRole == element){
+      isMatch = true;
+      return false;
+    }
+    return isMatch;
+    
+  });
 
-  // loggedIn() {
+}
+
+
+getToken(){
+  return localStorage.getItem("authToken");
+}
+
+decodedToken(){
+  const jwtHelper = new JwtHelperService();
+  const token = this.getToken()!;
+  console.log(jwtHelper.decodeToken(token))
+  return jwtHelper.decodeToken(token);
+}
+
+  // isloggedIn() {
   //   return !!localStorage.getItem('userToken');
   // }
 
+  getRole() {
+    const jwtHelper = new JwtHelperService();
+    const token = localStorage.getItem("authToken");
+    if (token) {
+      const decodedToken: any = jwtHelper.decodeToken(token);
+      return decodedToken.role;
+    }
+    return null;
+  }
 
 
 }

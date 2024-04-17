@@ -21,7 +21,11 @@ UserName: any;
 Password: any;
 user= new User();
 
-constructor( private fg : FormBuilder, private auth : AuthService, private router: Router, private toastr: ToastrService){}
+
+constructor( private fg : FormBuilder, private auth : AuthService,
+   private router: Router, private toastr: ToastrService){
+      sessionStorage.clear();
+    }
  
 ngOnInit(): void{
   this.LgForm = this.fg.group({
@@ -43,14 +47,19 @@ get f() { return this.LgForm.controls; }
 
     this.loading = true;
     // this.toastr.success('Successful');
-
-
-    this.auth.login(this.LgForm.value).subscribe((token : string) => {
+     
+    this.auth.login(this.LgForm.value).subscribe((token: any) => {
       localStorage.setItem('authToken', token);
+      var userRole = this.auth.getRole();
+      var myRole = ['Admin','User'];
+     if(JSON.stringify(userRole) === JSON.stringify(myRole)){
       this.toastr.success('Successful');
-      console.log(this.LgForm.value);
-      this.router.navigate(['/list']);
-      
+      this.router.navigate(['/list']); 
+     }else{
+      this.toastr.success('Successful');
+      this.router.navigate(['/shopping']); 
+     }
+                
     },
       err=>{
         alert("Wrong UserName or Password");
@@ -59,13 +68,6 @@ get f() { return this.LgForm.controls; }
     }
 
   }
-
-
-
- 
-
- 
-
 
 
 }

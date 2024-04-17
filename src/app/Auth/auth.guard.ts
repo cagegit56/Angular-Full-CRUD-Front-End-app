@@ -1,5 +1,7 @@
-import { Injectable, inject, ɵɵinject } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivateFn, Router, RouterStateSnapshot } from '@angular/router';
+import { Injectable, inject } from '@angular/core';
+import { ActivatedRouteSnapshot, CanActivateFn, Router, RouterStateSnapshot, ɵafterNextNavigation } from '@angular/router';
+import { AuthService } from '../_services/auth.service';
+
 
 
 
@@ -8,15 +10,24 @@ import { ActivatedRouteSnapshot, CanActivateFn, Router, RouterStateSnapshot } fr
 })
 
 
-
 class myAuth{
-  constructor( private router: Router){}
+  constructor( private router: Router, private auth: AuthService){}
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): boolean{
-     
+  
       if(localStorage.getItem('authToken') ){
-      return true;
+        let roles = route.data["roles"] as Array<string>;
+        if(roles){
+          var match: any = this.auth.roleMatch(roles);
+          if(match) return true;
+          else{
+            this.router.navigate(['/shopping']);
+            return false;
+          }
+        }
+          return true;
+              
       }
       return false;
     
