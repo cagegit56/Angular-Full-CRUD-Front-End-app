@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from '../_services/auth.service';
+
 
 @Component({
   selector: 'app-shopping',
@@ -8,100 +10,17 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./shopping.component.css']
 })
 export class ShoppingComponent {
+currentData: any;
+cartItems = 0;
 
-
-qnt : any;
-
-constructor(private toastr: ToastrService, private router: Router){}
+constructor(private toastr: ToastrService, private router: Router, private auth: AuthService){}
 
 ngOnInit(){
   this.cartItemFunc();
+  this.auth.currentData$.subscribe(data => this.cartItems = data);
 }
 
-productArray = [
-  {
-    prodId: 1,
-    img: "../../assets/t-shirt.jpg",
-    price: 680,
-    qnt: 1
-  },
-  {
-    prodId: 2,
-    img: "../../assets/t-shirt1.jpg",
-    price: 700,
-    qnt: 1
-  },
-  {
-    prodId: 3,
-    img: "../../assets/t-shirt2.jpg",
-    price: 952,
-    qnt: 1
-  },
-  {
-    prodId: 4,
-    img: "../../assets/t-shirt3.jpg",
-    price: 1800,
-    qnt: 1
-  }
 
-];
-
-inc(prd: any){
-  if(prd.qnt != 5){   
-   prd.qnt += 1;
-
-  }
-  
-}
-
-dec(prd: any){
-  if(prd.qnt != 1){   
-    prd.qnt -= 1;
- 
-   }
-}
-
-itemsCart: any = [];
-addCart(category: any){
-  console.log(category);
-
-  let checkNulls = localStorage.getItem('localcart');
-  if (checkNulls == null){
-    let storeDataGet: any = [];
-    storeDataGet.push(category);
-    localStorage.setItem('localcart', JSON.stringify(storeDataGet));
-    this.toastr.success('Successfully Added To Cart');
-  }
-  else{
-    var id = category.prodId;
-    let index: number = -1;
-    this.itemsCart = JSON.parse(localStorage.getItem('localcart')!);
-    for(let i=0; i<this.itemsCart.length; i++){
-
-      if(parseInt(id) === parseInt(this.itemsCart[i].prodId)){
-          this.itemsCart[i].qnt = category.qnt; 
-          index = i;
-          break;
-      }
-
-    }
-
-    if(index == -1){
-      this.itemsCart.push(category);
-      localStorage.setItem('localcart', JSON.stringify(this.itemsCart));
-      this.toastr.success('Successfully Added To Cart');
-    }
-    else{
-      localStorage.setItem('localcart', JSON.stringify(this.itemsCart));
-      this.toastr.success('Already Added To Cart');
-    }
-
-  }
-  this.cartItemFunc();
-  // localStorage.setItem('localcart', JSON.stringify(category));
-}
-
-cartItems = 0;
 cartItemFunc(){
   if(localStorage.getItem('localcart') != null){
     var cartCount = JSON.parse(localStorage.getItem('localcart')!)
@@ -113,6 +32,10 @@ cartItemFunc(){
 logOut(){
   localStorage.removeItem('authToken');
   this.router.navigate(['./welcome']);
+}
+
+myRoute(){
+  this.router.navigate(['./mytest']);
 }
 
 

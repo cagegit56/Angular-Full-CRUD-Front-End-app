@@ -11,17 +11,27 @@ import { PaymentComponent } from './payment/payment.component';
 import { TransactionComponent } from './transaction/transaction.component';
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
+import { TshirtsComponent } from './shopping/tshirts/tshirts.component';
+import { ShoesComponent } from './shopping/shoes/shoes.component';
+import { PantsComponent } from './shopping/pants/pants.component';
+import { JewelleryComponent } from './shopping/jewellery/jewellery.component';
+import { ProductsComponent } from './products/products.component';
 
 
 
 const routes: Routes = [
   { path: '', component: WelcomeComponent },
   { path: 'welcome', component: WelcomeComponent},
+  {path:'pants', component: ShoppingComponent, children: [{path:'', component: PantsComponent}]},
+  {path:'shoes', component: ShoppingComponent, children: [{path:'', component: ShoesComponent}]},
+  {path:'tshirts', component: ShoppingComponent, children: [{path:'', component: TshirtsComponent}]},
+  {path:'jewellery', component: ShoppingComponent, children: [{path:'', component: JewelleryComponent}]},
   {path:'reguser', component: ReguserComponent},
-  {path:'shopping', component: ShoppingComponent, canActivate: [authGuard]},
+  {path:'shopping', component: ShoppingComponent, children: [{path:'', component: TshirtsComponent}]},
   {path:'cart', component: CartComponent},
   {path:'payment', component: PaymentComponent},
   {path:'list', component: ListComponent, canActivate: [authGuard] },
+  { path: 'products', component: ProductsComponent },
   { path: 'employee/add', component: AddeditComponent },
   { path: 'employee/edit/:id', component: AddeditComponent },
   {path:'transaction', component: TransactionComponent},

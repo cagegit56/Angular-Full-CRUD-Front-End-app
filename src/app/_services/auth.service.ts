@@ -1,11 +1,12 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../_models/user';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { Forgotpass } from '../_models/forgotpass';
 import { Resetpass } from '../_models/resetpass';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { environment } from 'src/environments/environment';
+import { Prodmodel } from '../_models/prodmodel';
 
 
 @Injectable({
@@ -15,7 +16,9 @@ export class AuthService {
   authenticated: any;
 
   private baseUrl: String = 'https://localhost:7193/api/Authenticate/';
-  private userPayload: any;
+  private dataSubject = new Subject<number>();
+  currentData$ = this.dataSubject.asObservable();
+  
 
   constructor( private http: HttpClient, ) {}
 
@@ -87,6 +90,30 @@ decodedToken(){
     }
     return null;
   }
+
+
+updateData(cartItems: number) {
+  this.dataSubject.next(cartItems);
+}
+
+
+
+postFile( Id: string, ProdPrice: string, fileToUpload: File){
+
+  const endpoint = 'https://localhost:7193/api/ImageUpload/Image4';
+  const formdata: FormData = new FormData();
+  formdata.append('Id', Id);
+  formdata.append('myFile', fileToUpload, fileToUpload.name);
+  formdata.append('ProdPrice', ProdPrice);
+  const heada = new HttpHeaders({
+    'enctype': 'multipart/form-data'
+  });
+  return this.http.post(endpoint, formdata, {headers:heada});
+
+}
+
+
+
 
 
 }
