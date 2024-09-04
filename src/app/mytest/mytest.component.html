@@ -1,0 +1,21 @@
+<div *ngIf="totalrow===0">
+  <div class="alert alert-danger">Products not found</div>
+</div>
+
+<div class="loader" *ngIf="Loading">
+</div>
+
+<div *ngFor="let prd of products" >
+    <p>Product ID:{{prd.id}}</p>
+    <p>Product Name:{{prd.prodName}}</p>
+    <p>Product Price{{prd.prodPrice}}</p>
+    <img src="data:image/jpeg;base64,{{prd.imgData}}" style="width: 150px; height: 100px;" > 
+    
+</div> 
+
+
+
+
+
+
+   

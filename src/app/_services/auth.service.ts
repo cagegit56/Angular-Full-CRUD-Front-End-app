@@ -14,6 +14,8 @@ import { Prodmodel } from '../_models/prodmodel';
 })
 export class AuthService {
   authenticated: any;
+  myblob: any;
+  myblob2: string[] = [];
 
   private baseUrl: String = 'https://localhost:7193/api/Authenticate/';
   private dataSubject = new Subject<number>();
@@ -110,6 +112,12 @@ postFile( Id: string, ProdPrice: string, fileToUpload: File){
   });
   return this.http.post(endpoint, formdata, {headers:heada});
 
+}
+
+
+getAll(): Observable<Prodmodel[]> {
+  const endpoint = 'https://localhost:7193/api/ImageUpload';
+  return this.http.get<Prodmodel[]>(endpoint);
 }
 
 

@@ -22,6 +22,7 @@ import { PantsComponent } from './shopping/pants/pants.component';
 import { ShoesComponent } from './shopping/shoes/shoes.component';
 import { JewelleryComponent } from './shopping/jewellery/jewellery.component';
 import { ProductsComponent } from './products/products.component';
+import { MytestComponent } from './mytest/mytest.component';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { ProductsComponent } from './products/products.component';
     PantsComponent,
     ShoesComponent,
     JewelleryComponent,
-    ProductsComponent   
+    ProductsComponent,
+    MytestComponent   
   ],
   imports: [
     BrowserModule,

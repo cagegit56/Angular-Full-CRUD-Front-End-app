@@ -22,7 +22,7 @@ export class ProductsComponent {
   submitted = false;
   loading = false; 
   fileToUpload!: any;
-  imageUrl: string = "../../assets/jean.jpg";
+  imageUrl: string = "../../assets/defaultimage.jpg";
 
   constructor(private fg : FormBuilder,private auth: AuthService, private http: HttpClient, private toastr: ToastrService) {}
 
@@ -52,10 +52,9 @@ export class ProductsComponent {
     this.loading = true;
 
     console.log(ProdPrice + this.fileToUpload);
-    this.auth.postFile(Id.value,ProdPrice.value, this.fileToUpload).subscribe((data: any)=> {
-      if(data.succeeded == true)     
+    this.auth.postFile(Id.value,ProdPrice.value, this.fileToUpload).subscribe((data: any)=> {          
         alert('Product Succesfully Added');
-            
+           
     },(err: any) =>{
       alert('Failed to Add a Product');
       console.log(err);

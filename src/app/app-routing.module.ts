@@ -16,6 +16,7 @@ import { ShoesComponent } from './shopping/shoes/shoes.component';
 import { PantsComponent } from './shopping/pants/pants.component';
 import { JewelleryComponent } from './shopping/jewellery/jewellery.component';
 import { ProductsComponent } from './products/products.component';
+import { MytestComponent } from './mytest/mytest.component';
 
 
 
@@ -36,7 +37,8 @@ const routes: Routes = [
   { path: 'employee/edit/:id', component: AddeditComponent },
   {path:'transaction', component: TransactionComponent},
   {path:'forgotpassword', component: ForgotpasswordComponent},
-  {path:'resetpassword', component: ResetpasswordComponent}
+  {path:'resetpassword', component: ResetpasswordComponent},
+  {path:'mytest', component: MytestComponent}
 ];
 
 @NgModule({
