@@ -28,7 +28,6 @@ export class MytestComponent {
 
 
   loadProducts() {
-    try{
     this.Loading = true;
     this.auth.getAll().pipe(first())
       .subscribe((data: any) => {
@@ -36,17 +35,9 @@ export class MytestComponent {
         this.products = data;
         this.totalrow = data.length; 
         this.Loading = false;   
-      });
-
-    }catch(errors: any){
+      },err =>{
         this.Loading = false;
-        console.log(errors);
-    }
-
-
-   
-
-
+      });
 
   }
 

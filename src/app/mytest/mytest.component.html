@@ -1,9 +1,15 @@
-<div *ngIf="totalrow===0">
+<div class="alert alert-warning" *ngIf="Loading">Please Do Not Refresh The Page</div>
+<div *ngIf="!Loading">
+  <div *ngIf="totalrow===0">
   <div class="alert alert-danger">Products not found</div>
 </div>
-
-<div class="loader" *ngIf="Loading">
 </div>
+
+<div class="spinner-container" *ngIf="Loading">
+<div class="loader"></div>
+   <p>Please Wait, While Loading.......</p>
+</div>
+
 
 <div *ngFor="let prd of products" >
     <p>Product ID:{{prd.id}}</p>
