@@ -16,7 +16,7 @@
                     <br>
                     <br>                    
 					<div class="row">      
-						<form [formGroup]="ProductsForm" (ngSubmit)="onSubmitFile(Id,ProdPrice,myFile)" class="form-group">
+						<form [formGroup]="ProductsForm" (ngSubmit)="onSubmitFile(Id,ProdPrice,myFile,Category)" class="form-group">
          
       <img src="{{imageUrl}}" style="width: 250px; height: 200px;">
 			<div class="row">
@@ -62,13 +62,14 @@
                 <input
                 class="form__input"
                 type="text"
-                formControlName="Quantity"
-                placeholder="Quantity"
-                [ngClass]="{ 'is-invalid': submitted && f['Quantity'].errors }"
+                formControlName="Category"
+                #Category
+                placeholder="Category"
+                [ngClass]="{ 'is-invalid': submitted && f['Category'].errors }"
                 
                  />
-              <div *ngIf="submitted && f['Quantity'].errors" class="invalid-feedback">
-                <div *ngIf="f['Quantity'].errors?.['required']">Quantity is required</div>              
+              <div *ngIf="submitted && f['Category'].errors" class="invalid-feedback">
+                <div *ngIf="f['Category'].errors?.['required']">Category is required</div>              
               </div>
              
 

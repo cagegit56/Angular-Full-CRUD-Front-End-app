@@ -32,7 +32,7 @@ export class ProductsComponent {
      
       Id: ['', Validators.required],
       ProdPrice: ['', Validators.required],
-       Quantity: ['', Validators.required],
+      Category: ['', Validators.required],
        myFile: ['', Validators.required]
     }
     );
@@ -42,7 +42,7 @@ export class ProductsComponent {
   get f() { return this.ProductsForm.controls; }
 
 
-  onSubmitFile( Id: any, ProdPrice: any, myFile: any){
+  onSubmitFile( Id: any, ProdPrice: any, myFile: any, Category: any){
 
     this.submitted = true;
     if (this.ProductsForm.invalid) {
@@ -52,9 +52,10 @@ export class ProductsComponent {
     this.loading = true;
 
     console.log(ProdPrice + this.fileToUpload);
-    this.auth.postFile(Id.value,ProdPrice.value, this.fileToUpload).subscribe((data: any)=> {          
+    this.auth.postFile(Id.value,ProdPrice.value, Category.value, this.fileToUpload).subscribe((data: any)=> {          
         alert('Product Succesfully Added');
-           
+           this.ProductsForm.reset();
+           this.imageUrl = "../../assets/defaultimage.jpg";
     },(err: any) =>{
       alert('Failed to Add a Product');
       console.log(err);

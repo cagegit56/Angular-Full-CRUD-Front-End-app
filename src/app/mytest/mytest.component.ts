@@ -16,10 +16,10 @@ export class MytestComponent {
 
   products!: Prodmodel[];
   totalrow: number = 0;
-  Loading: boolean = false; 
+  Loading: boolean = false;
   
 
-  constructor(private auth: AuthService, private sanitizer: DomSanitizer, private http: HttpClient){}
+  constructor(private auth: AuthService){}
 
 
   ngOnInit(): void {
