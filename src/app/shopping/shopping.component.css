@@ -1,9 +1,9 @@
-header{
+/* header{
     background:#008080;
     padding: 20px 0;
-    }
+    } */
     .cart_icon{
-    position: relative;
+    position: relative ;
     cursor: pointer;
     }
     .cart_icon focus{
@@ -11,13 +11,13 @@ header{
     border: none;
     }
     .cart_icon i{
-    font-size: 24px;
+    font-size: 34px;
     color: #fff;
     }
     .cart_value{
     position: absolute;
     top: -16px;
-    right: -32px;
+    right: -18px;
     background: #fff;
     border: 1px soliod #ccc;
     border-radius: 50%;
@@ -89,6 +89,79 @@ img{
     .d3 {
         display:table-cell;
         text-align:right;
-        width: 800px;
+        width: 750px;
     }
+
+    .myinput[type=text] {
+        padding: 6px;
+        width: 400px;
+        margin-top: 8px;
+        font-size: 17px;
+        border: 1px solid #ccc;
+      }
+   .mybutton{
+    padding: 6px 10px;
+    margin-top: 8px;
+    margin-right: 16px;
+    background: #ddd;
+    font-size: 17px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+   }
+
+   a:hover{
+    color:rgb(94,0,0);
+    background: transparent;
+    }
+
+
+    nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #008080;
+        padding: 10px 20px;
+      }
+  
+      .nav-left, .nav-center, .nav-right {
+        display: flex;
+        align-items: center;
+      }
+  
+      .nav-left a, .nav-center a, .nav-right a {
+        color: white;
+        text-decoration: none;
+        padding: 10px;
+      }
+  
+      .nav-left a:hover, .nav-center a:hover, .nav-right a:hover {
+        background-color: #008080;
+      }
+  
+      .nav-center {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+  
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        nav {
+          flex-direction: column;
+        }
+  
+        .nav-center {
+          position: static;
+          transform: none;
+          margin: 10px 0;
+        }
+  
+        .nav-left, .nav-right {
+          justify-content: center;
+          margin-bottom: 10px;
+        }
+      }
+
+
+
 

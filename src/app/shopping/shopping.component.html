@@ -1,27 +1,35 @@
 <header>
-    <div class="container">
-      <div class="d1" routerLink="/shopping">
-         <i class="fa fa-home" aria-hidden="true">Home</i>
+  <nav>
+    <div class="nav-left">
+        <div class="navbar-header">
+      <a class="navbar-brand" href="#home" style="font-size: 25px; font-weight: bold;">CAGE
+        <i style="font-size: 47px;" class="fa fa-android" aria-hidden="true"></i></a>
+       </div>
+      <div class="nav navbar-nav">
+      <a style="font-size: 17px; font-weight: bold;"  href="#about">Category</a>
+    </div>
+    <div class="nav navbar-nav">
+        <a style="font-size: 17px; font-weight: bold;"  href="#about">Shipping</a>
       </div>
+    </div>
 
-      <div class="d2" routerLink="/cart">
-         <i class="fa fa-shopping-basket" aria-hidden="true">Shop</i>
-      </div>
+    <div class="nav-center">   
+        <input class="myinput"  type="text" placeholder="Search" [(ngModel)]="searchTerm" required />
+           <button  class="mybutton" type="submit" (click)="onSearch()">
+              <i class="fa fa-search"></i>
+          </button>
+    </div>
 
-      <div class="d3">
-    <div class="col-md-12 text-right">
-    
-    <div class="cart_icon" routerLink="/cart">
-       <i class="fa fa-shopping-cart"></i>
-    <div class="cart_value">
-    {{cartItems}}
+    <div class="nav-right">
+        <div class="cart_icon" routerLink="/cart">
+            <i class="fa fa-shopping-cart"></i>
+         <div class="cart_value">
+         {{cartItems}}
+         </div>
+         </div>
     </div>
-    </div>
-    
-    </div>
-   </div>
-
-    </div>
+  </nav>
+   
     
     </header>
     
@@ -104,8 +112,21 @@
           </div>
           <div class="col py-3">
             <!-- content -->
+             <div *ngIf="searchBar">
+                <div *ngFor="let item of filteredData">
+                    {{ item}}
+                </div>
+                    <div *ngIf="filteredData.length === 0">
+                        <div class="alert alert-danger">Search not found</div>
+                     </div>
+
+                  </div>             
+
+             <div *ngIf="!searchBar ">
               <router-outlet></router-outlet>
               <a routerLink="/products">Add Product</a>
+             </div>
+
           </div>
       </div>
   </div>
