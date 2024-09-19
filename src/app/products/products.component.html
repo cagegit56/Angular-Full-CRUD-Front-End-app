@@ -16,7 +16,7 @@
                     <br>
                     <br>                    
 					<div class="row">      
-						<form [formGroup]="ProductsForm" (ngSubmit)="onSubmitFile(Id,ProdPrice,myFile,Category)" class="form-group">
+						<form [formGroup]="ProductsForm" (ngSubmit)="onSubmitFile(Id,ProdPrice,myFile,Category,Quantity)" class="form-group">
          
       <img src="{{imageUrl}}" style="width: 250px; height: 200px;">
 			<div class="row">
@@ -92,7 +92,10 @@
               </div>            
 
 							</div>
-
+              
+              <div>
+              <input type="hidden" formControlName="Quantity" #Quantity value="1" />
+              </div>
 
 							<div class="row">
 								<input type="submit"  value="Submit" class="btn">

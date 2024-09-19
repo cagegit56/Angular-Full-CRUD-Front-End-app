@@ -100,13 +100,14 @@ updateData(cartItems: number) {
 
 
 
-postFile( Id: string, ProdPrice: string, Category: string, fileToUpload: File){
+postFile( Id: string, ProdPrice: string, Category: string, fileToUpload: File, Quantity: string){
 
   const endpoint = 'https://localhost:7193/api/ImageUpload/Image4';
   const formdata: FormData = new FormData();
   formdata.append('Id', Id);
   formdata.append('myFile', fileToUpload, fileToUpload.name);
   formdata.append('ProdPrice', ProdPrice);
+  formdata.append('Quantity', Quantity);
   formdata.append('Category', Category);
   const heada = new HttpHeaders({
     'enctype': 'multipart/form-data'

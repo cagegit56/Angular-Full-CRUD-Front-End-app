@@ -1,11 +1,11 @@
 import { Binary } from "@angular/compiler";
 
 export class Prodmodel {
-    prodid!: number;
+    id!: number;
     prodName! : string;
     prodPrice!: string;
     imgData!: [];
     category!: string;
-    //Quantity!: string;    
+    quantity!: number;    
     //Imagepic!: File;
 }

@@ -35,11 +35,11 @@ cartDetails(){
 
 }
 
-incQuantity(prodId: any, qnt: any){
+incQuantity(id: any, quantity: any){
      for(let i=0; i<this.getCartDetails.length; i++){
-      if(this.getCartDetails[i].prodId === prodId){
-           if(qnt != 5)
-           this.getCartDetails[i].qnt = parseInt(qnt) + 1;
+      if(this.getCartDetails[i].id === id){
+           if(quantity != 5)
+           this.getCartDetails[i].quantity = parseInt(quantity) + 1;
       }   
 
      }
@@ -48,11 +48,11 @@ incQuantity(prodId: any, qnt: any){
      this.loadTotal();
 }
 
-decQuantity(prodId: any, qnt: any){
+decQuantity(id: any, quantity: any){
   for(let i=0; i<this.getCartDetails.length; i++){
-   if(this.getCartDetails[i].prodId === prodId){
-        if(qnt != 1)
-        this.getCartDetails[i].qnt = parseInt(qnt) - 1;
+   if(this.getCartDetails[i].id === id){
+        if(quantity != 1)
+        this.getCartDetails[i].quantity = parseInt(quantity) - 1;
    }   
 
   }
@@ -66,7 +66,7 @@ loadTotal(){
   if(localStorage.getItem('localcart')){
       this.getCartDetails = JSON.parse(localStorage.getItem('localcart')!)
      this.total = this.getCartDetails.reduce(function(accumulator: any, value: any){
-          return accumulator + (value.price * value.qnt);
+          return accumulator + (value.prodPrice * value.quantity);
       }, 0);
   }
 }
@@ -77,7 +77,7 @@ delete(getDetails: any){
      this.getCartDetails = JSON.parse(localStorage.getItem('localcart')!);
 
      for( let i = 0; i<this.getCartDetails.length; i++){
-         if(this.getCartDetails[i].prodId === getDetails){
+         if(this.getCartDetails[i].prodid === getDetails){
              this.getCartDetails.splice(i,1)
              localStorage.setItem('localcart', JSON.stringify(this.getCartDetails));
              this.loadTotal();

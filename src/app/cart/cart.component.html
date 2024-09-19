@@ -39,16 +39,16 @@
     <th>Remove Item</th>
   </tr>
   <tr  *ngFor="let getDetails of getCartDetails">
-    <td><img src="{{getDetails.img}}" ></td>
-    <td>R{{getDetails.price}}</td>
+    <td><img src="data:image/jpeg;base64,{{getDetails.imgData}}" ></td>
+    <td>R{{getDetails.prodPrice}}</td>
     <td>
         <div class="content">
-        <button type="button" class="btn" (click)="incQuantity(getDetails.prodId, getDetails.qnt)"><i class="fa fa-plus"></i></button>
-        <span>{{getDetails.qnt}}</span>
-        <button type="button" class="btn" (click)="decQuantity(getDetails.prodId, getDetails.qnt)"><i class="fa fa-minus"></i></button>
+        <button type="button" class="btn" (click)="incQuantity(getDetails.id, getDetails.quantity)"><i class="fa fa-plus"></i></button>
+        <span>{{getDetails.quantity}}</span>
+        <button type="button" class="btn" (click)="decQuantity(getDetails.id, getDetails.quantity)"><i class="fa fa-minus"></i></button>
         </div>
     </td>
-    <td>R{{getDetails.qnt * getDetails.price }}</td>
+    <td>R{{getDetails.quantity * getDetails.prodPrice }}</td>
     <td class="white-space-nowrap">
            <button class="btn btn-outline-danger" placement="bottom" ngbTooltip="Delete" (click)="delete(getDetails.prodId)"><i
               class="bi bi-trash"></i></button>
