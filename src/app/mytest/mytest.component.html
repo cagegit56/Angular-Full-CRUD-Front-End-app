@@ -1,0 +1,29 @@
+<div class="alert alert-warning" *ngIf="Loading">Please Do Not Refresh The Page</div>
+<div *ngIf="!Loading">
+  <div *ngIf="totalrow===0">
+  <div class="alert alert-danger">Products not found</div>
+</div>
+</div>
+
+<div class="spinner-container" *ngIf="Loading">
+<div class="loader"></div>
+   <p>Please Wait, While Loading.......</p>
+</div>
+
+
+<div *ngFor="let prd of products" >
+     <div *ngIf="prd.category == 'shirt' ">
+      <p>Product ID:{{prd.id}}</p>
+      <p>Product Name:{{prd.prodName}}</p>
+      <p>Product Price{{prd.prodPrice}}</p>
+      <img src="data:image/jpeg;base64,{{prd.imgData}}" style="width: 150px; height: 100px;" > 
+     </div> 
+    
+</div> 
+
+
+
+
+
+
+   

@@ -1,0 +1,172 @@
+<header>
+  <nav>
+    <div class="nav-left">
+        <div class="navbar-header">
+      <a class="navbar-brand" href="#home" style="font-size: 25px; font-weight: bold;">CAGE
+        <i style="font-size: 47px;" class="fa fa-android" aria-hidden="true"></i></a>
+       </div>
+      <div class="nav navbar-nav">
+      <a style="font-size: 17px; font-weight: bold;"  href="#about">Category</a>
+    </div>
+    <div class="nav navbar-nav">
+        <a style="font-size: 17px; font-weight: bold;"  href="#about">Shipping</a>
+      </div>
+    </div>
+
+    <div class="nav-center">   
+        <input class="myinput"  type="text" placeholder="Search" [(ngModel)]="searchTerm" required />
+           <button  class="mybutton" type="submit" (click)="onSearch()">
+              <i class="fa fa-search"></i>
+          </button>
+    </div>
+
+    <div class="nav-right">
+        <div class="cart_icon" routerLink="/cart">
+            <i class="fa fa-shopping-cart"></i>
+         <div class="cart_value">
+         {{cartItems}}
+         </div>
+         </div>
+    </div>
+  </nav>
+   
+    
+    </header>
+    
+    
+    <div class="container-fluid">
+      <div class="row flex-nowrap">
+          <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
+              <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+                  <a href="" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                      <span class="fs-5 d-none d-sm-inline">Menu</span>
+                  </a>
+                  <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center text-white align-items-sm-start" id="menu">
+                      <li class="nav-item">
+                          <a href="#" class="nav-link align-middle text-white px-0">
+                              <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Home</span>
+                          </a>
+                      </li>
+                      <li>
+                          <a href="#submenu1" data-bs-toggle="collapse" class="nav-link text-white px-0 align-middle">
+                              <i class="fa fa-tshirt"></i> <span class="ms-1 d-none d-sm-inline">Clothes</span> </a>
+                          <ul class="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
+                              <li class="w-100">
+                                  <a routerLink="/tshirts" class="nav-link px-0 text-white"> <span class="d-none d-sm-inline">T-Shirts</span></a>
+                              </li>
+                              <li>
+                                  <a routerLink="/pants" class="nav-link px-0 text-white"> <span class="d-none d-sm-inline">Trousers / Pants</span></a>
+                              </li>
+                          </ul>
+                      </li>
+                      <li>
+                          <a routerLink="/cart" class="nav-link text-white px-0 align-middle">
+                           <i class="fa fa-shopping-cart" style="font-size:24px"></i> <span class="ms-1 d-none d-sm-inline">My Checkout</span></a>
+                      </li>
+                      <li>
+                          <a href="#submenu2" data-bs-toggle="collapse" class="nav-link text-white px-0 align-middle ">
+                              <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline">Footwear</span></a>
+                          <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu"> 
+                              <li class="w-100">
+                                  <a routerLink="/shoes" class="nav-link text-white px-0"> <span class="d-none d-sm-inline">Shoes</span></a>
+                              </li>
+                              <li>
+                                  <a href="/cart" class="nav-link text-white px-0"> <span class="d-none d-sm-inline">Boots</span></a>
+                              </li>
+                          </ul>
+                      </li>
+                      <li>
+                          <a href="#submenu3" data-bs-toggle="collapse" class="nav-link text-white px-0 align-middle">
+                              <i class="fs-4 bi-grid"></i> <span class="ms-1 d-none d-sm-inline">Accessories</span> </a>
+                              <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
+                              <li class="w-100">
+                                  <a routerLink="/jewellery" class="nav-link text-white px-0"> <span class="d-none d-sm-inline">jewellery</span></a>
+                              </li>
+                              <li>
+                                  <a href="#" class="nav-link text-white px-0"> <span class="d-none d-sm-inline">Watches</span></a>
+                              </li>
+                              <li>
+                                  <a href="#" class="nav-link text-white px-0"> <span class="d-none d-sm-inline">Earings</span></a>
+                              </li>
+                              <li>
+                                  <a href="#" class="nav-link text-white px-0"> <span class="d-none d-sm-inline">Rings</span></a>
+                              </li>
+                          </ul>
+                      </li>
+                      <li>
+                          <a href="#" class="nav-link text-white px-0 align-middle">
+                              <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Socks</span> </a>
+                      </li>
+                  </ul>
+                  <hr>
+                  <div class="dropdown pb-4">
+                     <a routerLink="" (click)="logOut()" class="d-flex align-items-center text-white text-decoration-none">
+                        <span class="d-none d-sm-inline mx-1">Logout</span>
+                     </a>
+                      <!-- <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                          <img src="" alt="hugenerd" width="30" height="30" class="rounded-circle">
+                          <span class="d-none d-sm-inline mx-1">User</span>
+                      </a> -->      
+                  </div>
+              </div>
+          </div>
+          <div class="col py-3">
+            <!-- content -->
+            <div *ngIf="searchBar">
+            <div class="product">
+                <div class="container text-center">
+                <div class="row" >
+                    
+                <div class="col-md-3" *ngFor="let resultData of filteredData">
+                <div class="box">
+                <div class="product_image"> 
+                <img src="data:image/jpeg;base64,{{resultData.imgData}}" alt="t-shirt">
+                 </div>
+                
+                <div class="content">
+                <h4>R{{resultData.prodPrice}}</h4>
+                <button type="button" class="btn" (click)="inc(resultData)"><i class="fa fa-plus"></i></button>
+                <span>{{resultData.quantity}}</span>
+                <button type="button" class="btn" (click)="dec(resultData)"><i class="fa fa-minus"></i></button>
+                </div>
+                <button type="button" class="cart_btn" (click)="addCart(resultData)">Add To Cart</button>
+                
+                </div>
+                </div>
+                
+                
+                
+                </div>
+                
+                </div> 
+                </div>
+            
+            
+            
+                <!-- <div *ngFor="let item of filteredData">
+                    {{ item}}
+                </div> -->
+
+
+                    <div *ngIf="filteredData.length === 0">
+                        <div class="alert alert-danger">Search not found</div>
+                     </div>
+
+                  </div>             
+
+             <div *ngIf="!searchBar ">
+              <router-outlet></router-outlet>
+              <a routerLink="/products">Add Product</a>
+             </div>
+
+          </div>
+      </div>
+  </div>
+
+
+
+       
+
+
+
+    

@@ -1,0 +1,70 @@
+<header>
+    <div class="container">
+      <div class="d1" routerLink="/shopping">
+        <i class="fa fa-home" aria-hidden="true">Home</i>
+     </div>
+
+     
+      <div class="d2" routerLink="/transaction">
+        <i class="fa fa-shopping-basket" aria-hidden="true">Shop</i>
+     </div>
+      
+      <div class="d3">
+    <div  class="col-md-12 text-right">
+    
+    <div class="cart_icon" routerLink="/cart">
+       <i class="fa fa-shopping-cart"></i>
+    <div class="cart_value">
+      {{cartItems}}
+    </div>
+    </div>
+    
+    </div>
+  </div>
+
+    </div>
+    
+    </header>
+
+<section class="cart_section">
+    <div class="container">
+      <h2>Cart</h2>
+<div *ngIf="getCartDetails">
+<table>
+  <tr>
+    <th>Image</th>
+    <th>Price</th>
+    <th>Quantity</th>
+    <th>Sub Total</th>
+    <th>Remove Item</th>
+  </tr>
+  <tr  *ngFor="let getDetails of getCartDetails">
+    <td><img src="data:image/jpeg;base64,{{getDetails.imgData}}" ></td>
+    <td>R{{getDetails.prodPrice}}</td>
+    <td>
+        <div class="content">
+        <button type="button" class="btn" (click)="incQuantity(getDetails.id, getDetails.quantity)"><i class="fa fa-plus"></i></button>
+        <span>{{getDetails.quantity}}</span>
+        <button type="button" class="btn" (click)="decQuantity(getDetails.id, getDetails.quantity)"><i class="fa fa-minus"></i></button>
+        </div>
+    </td>
+    <td>R{{getDetails.quantity * getDetails.prodPrice }}</td>
+    <td class="white-space-nowrap">
+           <button class="btn btn-outline-danger" placement="bottom" ngbTooltip="Delete" (click)="delete(getDetails.prodId)"><i
+              class="bi bi-trash"></i></button>
+  </td>
+  </tr>
+  
+</table>
+</div>
+<h3>Total=R{{total}}</h3>
+<div style="text-align: right">
+<button type="button" class="btn2"  (click)="removeAll()"><i class="bi bi-trash"></i> Remove All Items</button>
+</div>
+
+<button type="button"  class="btn1" routerLink="/payment"> Proceed To Payment</button>
+       
+
+
+    </div>
+    </section>

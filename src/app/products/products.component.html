@@ -1,0 +1,124 @@
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="author" content="Kagiso">
+	<title>Products Page</title>
+</head>
+<body>
+	<!-- Main Content -->
+	<div class="container-fluid">
+		<div class="row main-content bg-success text-center">
+			<div class="col-md-8 col-xs-12 col-sm-12 login_form ">
+				<div class="container-fluid">
+					<div class="row">
+						<h2>Add a Product</h2>
+					</div>
+                    <br>
+                    <br>                    
+					<div class="row">      
+						<form [formGroup]="ProductsForm" (ngSubmit)="onSubmitFile(Id,ProdPrice,myFile,Category,Quantity)" class="form-group">
+         
+      <img src="{{imageUrl}}" style="width: 250px; height: 200px;">
+			<div class="row">
+          <div>
+                 <p style="font-size: 22px; font-weight: bold; color: grey;">Choose Product Image</p>
+                <input
+                #myFile
+                type="file"
+                accept="image/*"
+                (change)="handleFileInput($event)"               
+                formControlName="myFile"
+                />
+               </div>
+               <div *ngIf="submitted && f['myFile'].errors" class="invalid-feedback">
+               <div *ngIf="f['myFile'].errors?.['required']"> File is required</div>
+              </div>
+             
+              </div>
+
+              <div class="row">
+							  <input
+                class="form__input"
+                type="text"
+                formControlName="ProdPrice"
+                #ProdPrice
+                placeholder="Price"
+                [ngClass]="{ 'is-invalid': submitted && f['ProdPrice'].errors }"
+                
+               />
+              <div *ngIf="submitted && f['ProdPrice'].errors" class="invalid-feedback">
+                <div *ngIf="f['ProdPrice'].errors?.['required']">Price is required</div>
+
+                <div *ngIf="f['ProdPrice'].errors?.['ProdPrice']">
+                    Price Format is Invalid
+                  </div>
+                
+              </div>
+            
+            
+							</div>
+
+							<div class="row">
+                <input
+                class="form__input"
+                type="text"
+                formControlName="Category"
+                #Category
+                placeholder="Category"
+                [ngClass]="{ 'is-invalid': submitted && f['Category'].errors }"
+                
+                 />
+              <div *ngIf="submitted && f['Category'].errors" class="invalid-feedback">
+                <div *ngIf="f['Category'].errors?.['required']">Category is required</div>              
+              </div>
+             
+
+							</div>
+
+
+
+              <div class="row">
+                <input
+                class="form__input"
+                type="number"
+                formControlName="Id"
+                #Id
+                placeholder="Id"
+                [ngClass]="{ 'is-invalid': submitted && f['Id'].errors }"
+                
+                 />
+              <div *ngIf="submitted && f['Id'].errors" class="invalid-feedback">
+                <div *ngIf="f['Id'].errors?.['required']">Id is required</div>                     
+              </div>            
+
+							</div>
+              
+              <div>
+              <input type="hidden" formControlName="Quantity" #Quantity value="1" />
+              </div>
+
+							<div class="row">
+								<input type="submit"  value="Submit" class="btn">
+							</div>
+						</form>
+					</div>
+					<div class="row">
+						<a routerLink="/welcome">Return Back To List</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+  <a routerLink="/mytest">View Image From Database</a>
+
+	<!-- Footer -->
+	<div class="container-fluid text-center footer">
+		Coded with &hearts; by <a href="https://bit.ly/yinkaenoch">Kagiso.</a>
+	</div>
+</body>
+
+
+
+
+

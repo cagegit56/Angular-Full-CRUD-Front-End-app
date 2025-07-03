@@ -1,0 +1,125 @@
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="author" content="Kagiso">
+	<title>Registration Page</title>
+</head>
+<body>
+	<!-- Main Content -->
+	<div class="container-fluid">
+		<div class="row main-content bg-success text-center">
+			<!-- <div class="col-md-4 text-center company__info">
+				<span class="company__logo"><h2><span class="fa fa-android"></span></h2></span>
+				<h4 class="company_title">Your Company Logo</h4>
+			</div> -->
+			<div class="col-md-8 col-xs-12 col-sm-12 login_form ">
+				<div class="container-fluid">
+					<div class="row">
+						<h2>Registration</h2>
+					</div>
+					<div class="row">
+						<form [formGroup]="RegForm" (ngSubmit)="onSubmit()" class="form-group">
+							<div class="row">
+                <input
+                class="form__input"
+                type="text"
+                formControlName="UserName"
+                placeholder="Username"
+                [ngClass]="{ 'is-invalid': submitted && f['UserName'].errors }"
+               />
+              <div *ngIf="submitted && f['UserName'].errors" class="invalid-feedback">
+                <div *ngIf="f['UserName'].errors?.['required']">Username is required</div>
+              </div>
+							</div>
+
+              <div class="row">
+								<!-- <span class="fa fa-lock"></span> -->
+                <input
+                class="form__input"
+                type="email"
+                formControlName="Email"
+                placeholder="Email"
+                [ngClass]="{ 'is-invalid': submitted && f['Email'].errors }"
+                
+               />
+                 <!-- [email]="true" -->
+              <div *ngIf="submitted && f['Email'].errors" class="invalid-feedback">
+                <div *ngIf="f['Email'].errors?.['required']">Email is required</div>
+
+                <div *ngIf="f['Email'].errors?.['email']">
+                  Email Format is Invalid
+                  </div>
+                
+              </div>
+            
+            
+							</div>
+
+							<div class="row">
+								<!-- <span class="fa fa-lock"></span> -->
+                <input
+                class="form__input"
+                type="password"
+                formControlName="Password"
+                placeholder="Password"
+                [ngClass]="{ 'is-invalid': submitted && f['Password'].errors }"
+                
+                 />
+              <div *ngIf="submitted && f['Password'].errors" class="invalid-feedback">
+                <div *ngIf="f['Password'].errors?.['required']">Password is required</div>
+                <div *ngIf="f['Password'].errors?.['minlength']">
+                  Password must be at least 8 characters
+                </div>
+                <div *ngIf="f['Password'].errors?.['maxlength']">
+                  Password must not exceed 16 characters
+                </div>
+
+                <div *ngIf="f['Password'].errors?.['pattern']">
+                  Password must contain at least one number, one uppercase and a lowercase letter 
+                  and at least 1 special character<br>Password cannot contain whitespace
+                </div>
+
+              </div>
+             
+
+							</div>
+
+              <div class="row">
+							
+                <input
+                class="form__input"
+                type="password"
+                formControlName="confirmPassword"
+                placeholder="Confirm Password"
+                [ngClass]="{ 'is-invalid': submitted && f['confirmPassword'].errors }"
+                 />
+              <div *ngIf="submitted && f['confirmPassword'].errors" class="invalid-feedback">
+                <div *ngIf="f['confirmPassword'].errors?.['required']">Confirm Password</div>
+
+                <div *ngIf="f['confirmPassword'].errors?.['notEqual']" >
+                  Passwords does not match
+                </div>
+               </div>
+
+
+							</div>
+
+							<div class="row">
+								<input type="submit" value="Submit" class="btn">
+							</div>
+						</form>
+					</div>
+					<div class="row">
+						<p>Already Have an Account.<a routerLink="/welcome">Sign in Here</a></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Footer -->
+	<div class="container-fluid text-center footer">
+		Coded with &hearts; by <a href="https://bit.ly/yinkaenoch">Kagiso.</a>
+	</div>
+</body>
+
+ 
